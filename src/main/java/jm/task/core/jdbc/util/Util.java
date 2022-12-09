@@ -10,16 +10,28 @@ public class Util {
     private static final String URL = "jdbc:mysql://localhost:3306/mydbtest";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
-    private static final Connection connection;
+   private static Driver driver;
+
+    {
+        try {
+            driver = new com.mysql.jdbc.Driver();
+            DriverManager.registerDriver(driver);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Connection connection = null;
 
     static {
         try {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             connection.setAutoCommit(false);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
+
 
     private Util() {
 
@@ -41,4 +53,5 @@ public class Util {
     public static Connection getConnection() throws SQLException {
         return connection;
     }
+
 }
