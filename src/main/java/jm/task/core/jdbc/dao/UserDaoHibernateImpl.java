@@ -31,8 +31,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
 
         } catch (Exception e) {
-            if (factory.getCurrentSession().getTransaction() != null)
-                factory.getCurrentSession().getTransaction().rollback();
+            factory.getCurrentSession().getTransaction().rollback();
             e.printStackTrace();
         }
     }
@@ -45,8 +44,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
 
         } catch (Exception e) {
-            if (factory.getCurrentSession().getTransaction() != null)
-                factory.getCurrentSession().getTransaction().rollback();
+            factory.getCurrentSession().getTransaction().rollback();
             e.printStackTrace();
         }
 
@@ -59,8 +57,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.save(new User(name, lastName, age));
             transaction.commit();
         } catch (Exception e) {
-            if (factory.getCurrentSession().getTransaction() != null)
-                factory.getCurrentSession().getTransaction().rollback();
+            factory.getCurrentSession().getTransaction().rollback();
             e.printStackTrace();
         }
 
@@ -75,8 +72,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
 
         } catch (Exception e) {
-            if (factory.getCurrentSession().getTransaction() != null)
-                factory.getCurrentSession().getTransaction().rollback();
+            factory.getCurrentSession().getTransaction().rollback();
             e.printStackTrace();
         }
 
@@ -91,8 +87,7 @@ public class UserDaoHibernateImpl implements UserDao {
             usersList = session.createSQLQuery("SELECT * FROM users").addEntity(User.class).list();
             transaction.commit();
         } catch (Exception e) {
-            if (factory.getCurrentSession().getTransaction() != null)
-                factory.getCurrentSession().getTransaction().rollback();
+            factory.getCurrentSession().getTransaction().rollback();
             e.printStackTrace();
         }
         return usersList;
@@ -106,8 +101,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery("truncate table users").executeUpdate();
             transaction.commit();
         } catch (Exception e) {
-            if (factory.getCurrentSession().getTransaction() != null)
-                factory.getCurrentSession().getTransaction().rollback();
+            factory.getCurrentSession().getTransaction().rollback();
             e.printStackTrace();
         }
     }
