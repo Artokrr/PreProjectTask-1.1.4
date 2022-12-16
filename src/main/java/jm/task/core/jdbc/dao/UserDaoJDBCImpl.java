@@ -2,6 +2,8 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
+import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
+import org.hibernate.internal.SessionImpl;
 
 
 import java.sql.Connection;
@@ -17,7 +19,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public UserDaoJDBCImpl() {
         try {
-            connection = Util.getConnection();
+            connection = Util.getSessionFactory().getSessionFactoryOptions().getServiceRegistry()
+                    .getService(ConnectionProvider.class).getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
